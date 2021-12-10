@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   pfdb:
-    image: bianjp/mariadb-alpine:latest
+    image: mariadb:10.3
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_PASSWORD
     container_name: "$CONTAINER_NAME-db"
@@ -13,6 +13,7 @@ services:
     volumes:
      - db_data:/var/lib/mysql
      - $PROJECT_ROOT/pathfinder/export/sql/eve_universe.sql.zip:/eve_universe.sql.zip
+     - $PROJECT_ROOT/mariadb.conf.d:/etc/mysql/conf.d
     restart: always
   pf-redis:
     image: redis:6.2.5-alpine3.14
